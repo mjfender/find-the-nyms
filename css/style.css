@@ -13,3 +13,7 @@
 #rootWord h3 {
   font-family: 'Holtwood One SC', serif;
 }
+
+#start-button {
+  padding-top: 25px;
+}

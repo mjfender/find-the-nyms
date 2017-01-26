@@ -7,7 +7,9 @@ class StatusController {
   // # right during round
 
   constructor() {
-  
+    this.$scoreboard = $('#scoreboard')
+    this.$score = $('#score')
+    this.$timer = $('#timer')
   }
 
   init() {
