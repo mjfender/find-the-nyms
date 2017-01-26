@@ -1,0 +1,15 @@
+.js--gameWords{
+  background-color: #A9FFCB;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  align-content: center;
+}
+
+.js--gameWords h4 {
+  font-family: 'Gilda Display', serif;
+  text-align: center;
+}
+
+#rootWord h3 {
+  font-family: 'Holtwood One SC', serif;
+}
