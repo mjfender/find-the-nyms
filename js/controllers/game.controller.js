@@ -5,12 +5,15 @@ class GameController {
     this.$scoreboard = $('#scoreboard')
     this.$wordList = $('#wordList')
     this.$startButton = $('#start-button')
+    this.$roundboard = $('#roundboard')
   }
 
   init() {
     this.$rootWord.hide()
     this.$scoreboard.hide()
     this.$wordList.hide()
+    this.$roundboard.hide()
+
 
     this.$startButton.click( (event) => {
       this.startGame()
@@ -29,22 +32,35 @@ class GameController {
     this.$rootWord.show()
     this.$scoreboard.show()
     this.$wordList.show()
+    this.$roundboard.show()
 
     var $allWordListEls = $('.js--gameWords')
     $allWordListEls.click( (event) => {
-      debugger
-      var wordInfo = event.currentTarget.id.
+      
+      var wordInfo = event.currentTarget.id
       var [wordName, wordType] = wordInfo.split("_")
       var value = newGame.getLevelValue()
-      console.log(this.currentPlayer.score)
-      if (wordType === value) {
-          console.log(this.currentPlayer.score)
-        currentPlayer.winsPoints()
+      var currentPlayer = newGame.currentPlayer()
+      var $wordDivInDOM = $(`#${wordInfo}`)
+
+
+      if (value.includes(wordType)) {
+        $wordDivInDOM.css('background-color', '#A9FFCB')
+        currentPlayer.winsPoint()
       } else {
-        //currentPlayer.makesMistake()
+        $wordDivInDOM.css('background-color', '#EF271B')
+        currentPlayer.makesMistake()
       }
-      debugger
-      // listenerFunction(event)
+      $('#player').html(`Player ${currentPlayer.id}`)
+      $('#score').html(`Score: ${currentPlayer.score}`)
+
+      if (currentPlayer.roundScore >= 5 || currentPlayer.mistakes >= 3) {
+        alert('Round over, boo')
+      }
+
+      $wordDivInDOM.unbind("click")
+      console.log("It worked!")
+
     })
 
     // define the listener function that checks whether right or not
