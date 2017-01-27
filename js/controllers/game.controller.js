@@ -20,28 +20,51 @@ class GameController {
     })
   }
 
-
-
-
   startGame() {
     this.$startButton.hide()
     var newGame = new Game()
-    var newWord = Word.getRandom()
-    newWord.build()
-
+    this.buildRandomWord()
     this.$rootWord.show()
     this.$scoreboard.show()
     this.$wordList.show()
     this.$roundboard.show()
+    this.startRound(newGame)
+    // endRound()
+    // startRound()
+    // endGame()
 
     var $allWordListEls = $('.js--gameWords')
-    $allWordListEls.click( (event) => {
-      
-      var wordInfo = event.currentTarget.id
-      var [wordName, wordType] = wordInfo.split("_")
-      var value = newGame.getLevelValue()
-      var currentPlayer = newGame.currentPlayer()
-      var $wordDivInDOM = $(`#${wordInfo}`)
+    $allWordListEls.click((event) => this.eventHandler(event, newGame))
+
+
+  }
+
+  buildRandomWord(){
+    var newWord = Word.getRandom()
+    newWord.build()
+    return newWord
+  }
+
+  endRound(){
+    this.$rootWord.hide()
+    this.$wordList.hide()
+  }
+
+
+  startRound(newGame){
+    this.$rootWord.show()
+    this.$wordList.show()
+    this.round ++
+
+
+  }
+
+  eventHandler(event, newGame){
+    var wordInfo = event.currentTarget.id
+    var [wordName, wordType] = wordInfo.split("_")
+    var value = newGame.getLevelValue()
+    var currentPlayer = newGame.currentPlayer()
+    var $wordDivInDOM = $(`#${wordInfo}`)
 
 
       if (value.includes(wordType)) {
@@ -60,13 +83,9 @@ class GameController {
 
       $wordDivInDOM.unbind("click")
       console.log("It worked!")
-
-    })
-
-    // define the listener function that checks whether right or not
-    // and make all the changes necessary to score, mistakes, etc
-
-  }
+    }
+  // define the listener function that checks whether right or not
+  // and make all the changes necessary to score, mistakes, etc
 
 
 }
