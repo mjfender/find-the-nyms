@@ -19,10 +19,18 @@ class GameController {
 
   startGame() {
     this.$startButton.hide()
-    // Word Model is creating the html, and appending to DOM
+    var newWord = Word.getRandom()
+    newWord.build()
+
     this.$rootWord.show()
     this.$scoreboard.show()
     this.$wordList.show()
+
+    var $allWordListEls = $('.js--gameWords')
+    $allWordListEls.click( (event) => { listenerFunction(event) } )
+
+    // define the listener function that checks whether right or not
+    // and make all the changes necessary to score, mistakes, etc
 
   }
 
