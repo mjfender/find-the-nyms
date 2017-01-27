@@ -4,7 +4,6 @@ class GameController {
     this.$rootWord = $('#rootWord')
     this.$scoreboard = $('#scoreboard')
     this.$roundboard = $('#roundboard')
-
     this.$wordList = $('#wordList')
     this.$startButton = $('#start-button')
     this.$startText = $('#start-text')
@@ -24,21 +23,7 @@ class GameController {
   startGame() {
     this.$startButton.hide()
     var newGame = new Game()
-    this.buildRandomWord()
-    this.$rootWord.show()
-    this.$scoreboard.show()
-    this.$roundboard.show()
-
-    this.$wordList.show()
     this.startRound(newGame)
-    // endRound()
-    // startRound()
-    // endGame()
-
-    var $allWordListEls = $('.js--gameWords')
-    $allWordListEls.click((event) => this.eventHandler(event, newGame))
-
-
   }
 
   nextRound(newGame) {
@@ -48,6 +33,12 @@ class GameController {
     this.$roundboard.hide()
     this.$startText.html('Start Next Round')
     this.$startButton.show()
+    $("#rootWord_h3").remove()
+    $(".js--gameWords").remove()
+    newGame.round ++
+    var currentPlayer = newGame.currentPlayer()
+    currentPlayer.roundScore = 0
+    currentPlayer.mistakes = 0
 
     this.$startButton.click( (event) => {
       this.startRound(newGame)
@@ -56,21 +47,29 @@ class GameController {
   }
 
   startRound(newGame){
+    this.$startButton.hide()
+    this.buildRandomWord()
     this.$rootWord.show()
     this.$wordList.show()
-    this.round ++
+    $('#player').html(`Player ${newGame.currentPlayer().id}`)
+    $('#score').html(`Score: ${newGame.currentPlayer().score}`)
+    $('#mistakes').html(`Mistakes: ${newGame.currentPlayer().mistakes}`)
+    this.$scoreboard.show()
+    this.$roundboard.show()
+
+    var $allWordListEls = $('.js--gameWords')
+    $allWordListEls.click((event) => this.eventHandler(event, newGame))
   }
 
   buildRandomWord(){
     var newWord = Word.getRandom()
     newWord.build()
-    return newWord
   }
 
-  endRound(){
-    this.$rootWord.hide()
-    this.$wordList.hide()
-  }
+  // endRound(){
+  //   this.$rootWord.hide()
+  //   this.$wordList.hide()
+  // }
 
   eventHandler(event, newGame){
     var wordInfo = event.currentTarget.id
@@ -80,7 +79,7 @@ class GameController {
   }
 
 
-  interpretMove(newGame, wordInfo, wordType){ 
+  interpretMove(newGame, wordInfo, wordType){
   var value = newGame.getLevelValue()
   var currentPlayer = newGame.currentPlayer()
   var $wordDivInDOM = $(`#${wordInfo}`)
@@ -92,7 +91,7 @@ class GameController {
       $wordDivInDOM.css('background-color', '#EF271B')
       currentPlayer.makesMistake()
     }
-    
+
     $('#player').html(`Player ${currentPlayer.id}`)
     $('#score').html(`Score: ${currentPlayer.score}`)
     $('#mistakes').html(`Mistakes: ${currentPlayer.mistakes}`)
@@ -113,4 +112,3 @@ class GameController {
 }
   // define the listener function that checks whether right or not
   // and make all the changes necessary to score, mistakes, etc
-
