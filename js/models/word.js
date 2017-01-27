@@ -9,9 +9,7 @@ class Word {
   }
 
   wordEl(){
-    return `<h3>${this.name}</h3>` // html tag for the word divs
-    // <div id="rootWord" class="col s9">
-    //   <h3>Divine</h3>
+    return `<h3 id="rootWord_h3">${this.name}</h3>`
   }
 
   listEl(){
@@ -26,6 +24,7 @@ class Word {
 
   build(){
     $('#rootWord').append(this.wordEl())
+
     var listOfWords = this.listEl().join('')
     $('#wordList').append(listOfWords)
   }
