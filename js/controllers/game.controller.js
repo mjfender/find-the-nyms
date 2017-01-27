@@ -17,6 +17,9 @@ class GameController {
     })
   }
 
+
+
+
   startGame() {
     this.$startButton.hide()
     var newWord = Word.getRandom()

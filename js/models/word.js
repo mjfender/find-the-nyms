@@ -34,7 +34,8 @@ class Word {
 
 Word.all = allWords
 
-
-// function randomWord(){
-//
-// }
+Word.getRandom = function (min = 0) {
+  min = Math.ceil(min);
+  max = Word.all.length
+  return Word.all[Math.floor(Math.random() * (max - min)) + min]
+}
