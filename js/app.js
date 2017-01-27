@@ -3,4 +3,5 @@ $(function() { // on document ready
   gameController.init();
   statusController = new StatusController();
   statusController.init();
+
 });

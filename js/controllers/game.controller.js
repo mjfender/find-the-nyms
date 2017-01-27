@@ -19,10 +19,12 @@ class GameController {
 
   startGame() {
     this.$startButton.hide()
+    // Word Model is creating the html, and appending to DOM
     this.$rootWord.show()
     this.$scoreboard.show()
     this.$wordList.show()
 
   }
-}
 
+
+}
