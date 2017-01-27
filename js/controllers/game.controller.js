@@ -22,6 +22,7 @@ class GameController {
 
   startGame() {
     this.$startButton.hide()
+    var newGame = new Game()
     var newWord = Word.getRandom()
     newWord.build()
 
@@ -30,7 +31,21 @@ class GameController {
     this.$wordList.show()
 
     var $allWordListEls = $('.js--gameWords')
-    $allWordListEls.click( (event) => { listenerFunction(event) } )
+    $allWordListEls.click( (event) => {
+      debugger
+      var wordInfo = event.currentTarget.id.
+      var [wordName, wordType] = wordInfo.split("_")
+      var value = newGame.getLevelValue()
+      console.log(this.currentPlayer.score)
+      if (wordType === value) {
+          console.log(this.currentPlayer.score)
+        currentPlayer.winsPoints()
+      } else {
+        //currentPlayer.makesMistake()
+      }
+      debugger
+      // listenerFunction(event)
+    })
 
     // define the listener function that checks whether right or not
     // and make all the changes necessary to score, mistakes, etc
