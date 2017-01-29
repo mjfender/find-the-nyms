@@ -1,5 +1,5 @@
 var allWords = []
-
+var usedWords = []
 
 class Word {
   constructor(name, object) {
@@ -32,9 +32,14 @@ class Word {
 }
 
 Word.all = allWords
+Word.usedWords = usedWords
 
 Word.getRandom = function (min = 0) {
   min = Math.ceil(min);
   max = Word.all.length
-  return Word.all[Math.floor(Math.random() * (max - min)) + min]
+  var thisNewWord = Word.all[Math.floor(Math.random() * (max - min)) + min]
+  Word.usedWords.push(thisNewWord)
+  indexToDelete = Word.all.findIndex( (word) => { return word === thisNewWord})
+  Word.all.splice(indexToDelete, 1)
+  return thisNewWord
 }
