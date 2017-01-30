@@ -18,5 +18,14 @@ new Word("slow", { "sluggish":"synonym", "snail-paced":"synonym", "tardy":"synon
 
 new Word("good", { "all right":"synonym", "acceptably":"synonym", "decent":"synonym", "just":"synonym", "moral":"synonym", "true":"synonym", "well":"synonym", "virtuous":"synonym", "nice":"synonym", "right":"synonym", "ethical":"synonym", "satisfactorily":"synonym", "fine":"synonym", "bad":"antonym", "dishonest":"antonym", "evil":"antonym", "immoral":"antonym", "indecent":"antonym", "unethical":"antonym", "unrighteous":"antonym", "unsatisfactory":"antonym", "wrong":"antonym", "deficient":"antonym", "lousy":"antonym"})
 
+new Word("delicious", { "appetizing":"synonym", "delectable":"synonym", "delish":"synonym", "mouthwatering":"synonym", "scrumptious":"synonym", "tasty":"synonym", "yummy":"synonym", "palatable":"synonym", "luscious":"synonym", "succulent":"synonym", "distasteful":"antonym", "flavorless":"antonym", "unappetizing":"antonym", "unpalatable":"antonym", "yucky":"antonym", "":"antonym", "unsavory":"antonym", "unpleasant":"antonym"})
+
+new Word("loud", { "blaring":"synonym", "blasting":"synonym", "earsplitting":"synonym", "roaring":"synonym", "thundering":"synonym", "extravagant":"synonym", "over-the-top":"synonym", "gaudy":"synonym", "noisy":"synonym", "gentle":"antonym", "soft":"antonym", "low":"antonym", "conservative":"antonym", "quiet":"antonym", "understated":"antonym", "unflamboyant":"antonym", "unflashy":"antonym"})
+
+new Word("brave", { "bold":"synonym", "courageous":"synonym", "fearless":"synonym", "gutsy":"synonym", "heroic":"synonym", "stalwart":"synonym", "valiant":"synonym", "audacious":"synonym", "unafraid":"synonym", "undeterred":"synonym", "chicken":"antonym", "cowardly":"antonym", "fainthearted":"antonym", "fearful":"antonym", "spineless":"antonym", "weakhearted":"antonym", "uncourageous":"antonym", "":"antonym", "unheroic":"antonym"})
+
+new Word("slow", { "sluggish":"synonym", "snail-paced":"synonym", "tardy":"synonym", "unhurried":"synonym", "leisurely":"synonym", "crawling":"synonym", "dragging":"synonym", "languid":"synonym", "dawdling":"synonym", "dillydallying":"synonym", "brisk":"antonym", "rapid":"antonym", "warp-speed":"antonym", "hurrying":"antonym", "quick":"antonym", "speedy":"antonym", "swift":"antonym", "rushing":"antonym", "flying":"antonym", "bolting":"antonym", "fast":"antonym"})
+
+new Word("good", { "all right":"synonym", "decent":"synonym", "just":"synonym", "moral":"synonym", "true":"synonym", "virtuous":"synonym", "nice":"synonym", "right":"synonym", "ethical":"synonym", "fine":"synonym", "bad":"antonym", "dishonest":"antonym", "evil":"antonym", "immoral":"antonym", "indecent":"antonym", "unethical":"antonym", "unrighteous":"antonym", "unsatisfactory":"antonym", "wrong":"antonym", "deficient":"antonym", "lousy":"antonym"})
 
 // new Word("filler", {})

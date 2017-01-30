@@ -10,6 +10,7 @@ class GameController {
     this.randomWordArray = []
     this.intervalID = 0
     this.seconds = 30
+
   }
 
   init() {
@@ -20,6 +21,7 @@ class GameController {
       this.startGame()
     })
   }
+
 
   hideBoard(){
     this.$scoreboard.hide()
@@ -51,15 +53,10 @@ class GameController {
 
     this.timeout(newGame)
 
-
-    // $('#timer').html(`Timer: ${this.seconds} secs`)
-    // this.timeoutID = setTimeout(() => {this.nextRound(newGame)}, 30000)
-    // this.seconds--
-    // $('#timer').html(`Timer: ${this.seconds} secs`)
-
     var $allWordListEls = $('.js--gameWords')
     $allWordListEls.click((event) => this.eventHandler(event, newGame))
   }
+
 
   timeout(newGame){
     this.seconds = 30
@@ -89,6 +86,7 @@ class GameController {
     currentPlayer.mistakes = 0
 
     this.$rootWord.empty()
+
     this.hideBoard()
     this.$messageboard.html(newGame.currentRules())
     this.$messageboard.show()

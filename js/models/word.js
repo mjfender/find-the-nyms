@@ -1,5 +1,5 @@
 var allWords = []
-
+var usedWords = []
 
 class Word {
   constructor(name, object) {
@@ -53,3 +53,4 @@ class Word {
 }
 
 Word.all = allWords
+
