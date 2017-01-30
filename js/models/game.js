@@ -10,7 +10,15 @@ class Game {
   advanceRound() {
     this.round ++
     // advance the game's level every 2 rounds
-    if (this.round % 2 === 0) this.level = this.round / 2
+
+    if (this.round % 2 === 0) {
+      if (this.player1.score >=15 || this.player2.score >= 15) {
+        return false
+      }
+
+      this.level = this.round / 2
+      return true
+    }
   }
 
   currentPlayer() {
@@ -25,7 +33,7 @@ class Game {
     if (this.player1.score > this.player2.score){
       return "Player 1"
     } else if (this.player1.score === this.player2.score) {
-      return "Both Players."
+      return "Both Players"
     } else {
       return "Player 2"
     }
@@ -42,6 +50,9 @@ class Game {
       case 2:
         return "<h5>This level, choose <strong>either synonyms OR antonyms.</strong> <br><br>When you start the round, click the words that are <strong>synonyms or antonyms</strong> of the large word at the top. </h5>"
         break;
+      default:
+        return "<h5>This level, choose <strong>either synonyms OR antonyms.</strong> <br><br>When you start the round, click the words that are <strong>synonyms or antonyms</strong> of the large word at the top. </h5>"
+        break;
     }
   }
 
@@ -56,6 +67,9 @@ class Game {
       case 2:
         return `<h5><strong>Player ${this.currentPlayer().id}</strong>: Click the <strong>synonyms and antonyms</strong> below</h5>`
         break;
+      default:
+         return `<h5><strong>Player ${this.currentPlayer().id}</strong>: Click the <strong>synonyms and antonyms</strong> below</h5>`
+         break;
     }
   }
 
@@ -68,6 +82,9 @@ class Game {
         return ["antonym"]
         break;
       case 2:
+        return ["synonym", "antonym"]
+        break;
+      default: 
         return ["synonym", "antonym"]
         break;
     }
