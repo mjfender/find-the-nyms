@@ -6,6 +6,7 @@ class GameController {
     this.$wordList = $('#wordList')
     this.$startButton = $('#start-button')
     this.$startText = $('#start-text')
+    this.$restartButton = $('#restart-button')
     this.$messageboard = $('#messageboard')
     this.$endButton = $('#end-button')
     this.randomWordArray = []
@@ -17,8 +18,9 @@ class GameController {
   init() {
     this.$rootWord.hide()
     this.$endButton.hide()
+    this.$restartButton.hide()
     this.hideBoard()
-    this.$messageboard.html("<h1>Welcome</h1><h4>Grab a friend and get ready to play!</h4> <p>Learn about synonyms and antonyms while you discover new words.<br> Earn up to 5 points each round. <br> The round ends when you make three mistakes or 30 seconds run out. <br><strong>The first player to reach 20 points wins!</strong></h1>")
+    this.$messageboard.html("<h1>Welcome</h1><h4>Grab a friend and get ready to play!</h4> <p>Learn about synonyms and antonyms while you discover new words.<br> Earn up to 5 points each round. <br> The round ends when you make three mistakes or 30 seconds run out. <br><strong>The first player to reach 15 points wins!</strong></h1>")
     this.$startButton.click( (event) => {
       this.startGame()
     })
@@ -40,6 +42,9 @@ class GameController {
   startRound(newGame){
     this.$startButton.hide()
     this.$startButton.unbind("click")
+    this.$endButton.hide()
+    this.$endButton.unbind("click")
+
     this.$messageboard.html(newGame.currentRulesShort())
     this.$messageboard.show()
 
@@ -80,29 +85,35 @@ class GameController {
     if (newGame.firstRun) {
       newGame.firstRun = false
     } else {
-      newGame.advanceRound()
+      var advancedRound = newGame.advanceRound()
     }
 
-    var currentPlayer = newGame.currentPlayer()
-    currentPlayer.roundScore = 0
-    currentPlayer.mistakes = 0
+    if (advancedRound === false) {
+      this.hideBoard()
+      this.$rootWord.empty()
+      this.endGame(newGame)
+    } else {
+      var currentPlayer = newGame.currentPlayer()
+      currentPlayer.roundScore = 0
+      currentPlayer.mistakes = 0
 
-    this.$rootWord.empty()
+      this.$rootWord.empty()
 
-    this.hideBoard()
-    this.$messageboard.html(newGame.currentRules())
-    this.$messageboard.show()
-    this.$startText.html(`Player ${currentPlayer.id}: Start Next Round`)
-    this.$startButton.show()
-    if (newGame.round % 2 === 0 && newGame.round !== 0){
-      this.$endButton.show()
-      this.$endButton.click(() => this.endGame(newGame))
+      this.hideBoard()
+      this.$messageboard.html(newGame.currentRules())
+      this.$messageboard.show()
+      this.$startText.html(`Player ${currentPlayer.id}: Start Next Round`)
+      this.$startButton.show()
+      if (newGame.round % 2 === 0 && newGame.round !== 0){
+        this.$endButton.show()
+        this.$endButton.click(() => this.endGame(newGame))
+      }
+      $(".js--gameWords").remove()
+
+      this.$startButton.click( (event) => {
+        this.startRound(newGame)
+      })
     }
-    $(".js--gameWords").remove()
-
-    this.$startButton.click( (event) => {
-      this.startRound(newGame)
-    })
 
   }
 
@@ -111,8 +122,10 @@ class GameController {
     this.$endButton.unbind("click")
     this.$startButton.hide()
     this.$startButton.unbind("click")
+    this.$restartButton.show()
+    this.$restartButton.click( () => location.reload())
     var winner = newGame.declareWinner()
-    this.$messageboard.html(`<h1>Game Over</h1><h4> Winner: ${winner}</h4> <p>Player1: ${newGame.player1.score}<br>  Player2: ${newGame.player2.score}<br>  <br><strong>Thank you for playing!</strong>`)
+    this.$messageboard.html(`<h1>Game Over</h1><hr><h4> Winner: ${winner}</h4> <p>Player 1 Score: ${newGame.player1.score}<br>  Player 2 Score: ${newGame.player2.score}<br>  <br><strong>Thank you for playing!</strong>`)
   }
 
   buildRandomWord(){

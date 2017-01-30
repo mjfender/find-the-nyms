@@ -18,7 +18,7 @@ new Word("brave", { "bold":"synonym", "courageous":"synonym", "fearless":"synony
 
 new Word("slow", { "sluggish":"synonym", "snail-paced":"synonym", "tardy":"synonym", "unhurried":"synonym", "leisurely":"synonym", "crawling":"synonym", "dragging":"synonym", "languid":"synonym", "dawdling":"synonym", "dillydallying":"synonym", "brisk":"antonym", "rapid":"antonym", "warp-speed":"antonym", "hurrying":"antonym", "quick":"antonym", "speedy":"antonym", "swift":"antonym", "rushing":"antonym", "flying":"antonym", "bolting":"antonym", "fast":"antonym"})
 
-new Word("good", { "all right":"synonym", "acceptably":"synonym", "decent":"synonym", "just":"synonym", "moral":"synonym", "true":"synonym", "well":"synonym", "virtuous":"synonym", "nice":"synonym", "right":"synonym", "ethical":"synonym", "satisfactorily":"synonym", "fine":"synonym", "bad":"antonym", "dishonest":"antonym", "evil":"antonym", "immoral":"antonym", "indecent":"antonym", "unethical":"antonym", "unrighteous":"antonym", "unsatisfactory":"antonym", "wrong":"antonym", "deficient":"antonym", "lousy":"antonym"})
+new Word("good", { "alright":"synonym", "acceptable":"synonym", "decent":"synonym", "just":"synonym", "moral":"synonym", "true":"synonym", "well":"synonym", "virtuous":"synonym", "nice":"synonym", "right":"synonym", "ethical":"synonym", "satisfactorily":"synonym", "fine":"synonym", "bad":"antonym", "dishonest":"antonym", "evil":"antonym", "immoral":"antonym", "indecent":"antonym", "unethical":"antonym", "unrighteous":"antonym", "unsatisfactory":"antonym", "wrong":"antonym", "deficient":"antonym", "lousy":"antonym"})
 
 
 
