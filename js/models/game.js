@@ -1,4 +1,3 @@
-
 class Game {
   constructor(round= 0, level= 0) {
     this.player1 = new Player(1)

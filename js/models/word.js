@@ -21,25 +21,36 @@ class Word {
     return array
   }
 
+  randomizeList(){
+    var array = this.listEl()
+    array.forEach((element, i, array) => {
+      var currentIndex = Math.floor(Math.random() * ( i + 1))
+      var temp = array[i]
+      array[i] = array[currentIndex]
+      array[currentIndex] = temp;
+    })
+    return array.slice(0, 21)
+  }
+
 
   build(){
     $('#rootWord').append(this.wordEl())
-
-    var listOfWords = this.listEl().join('')
+    var listOfWords = this.randomizeList().join('')
     $('#wordList').append(listOfWords)
+  }
+
+  static randomWords(startLevel = 0){
+    var array = Word.all.slice(startLevel)
+    array.forEach((element, i, array) => {
+      var currentIndex = Math.floor(Math.random() * ( i + 1))
+      var temp = array[i]
+      array[i] = array[currentIndex]
+      array[currentIndex] = temp;
+    })
+    return array
   }
 
 }
 
 Word.all = allWords
-Word.usedWords = usedWords
 
-Word.getRandom = function (min = 0) {
-  min = Math.ceil(min);
-  max = Word.all.length
-  var thisNewWord = Word.all[Math.floor(Math.random() * (max - min)) + min]
-  Word.usedWords.push(thisNewWord)
-  indexToDelete = Word.all.findIndex( (word) => { return word === thisNewWord})
-  Word.all.splice(indexToDelete, 1)
-  return thisNewWord
-}

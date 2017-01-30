@@ -1,4 +1,3 @@
-
 class GameController {
   constructor() {
     this.$rootWord = $('#rootWord')
@@ -8,24 +7,33 @@ class GameController {
     this.$startButton = $('#start-button')
     this.$startText = $('#start-text')
     this.$messageboard = $('#messageboard')
+    this.randomWordArray = []
+    this.intervalID = 0
+    this.seconds = 30
+
   }
 
   init() {
     this.$rootWord.hide()
-    this.$scoreboard.hide()
-    this.$roundboard.hide()
-    this.$wordList.hide()
+    this.hideBoard()
     this.$messageboard.html("<h1>Welcome</h1><h4>Grab a friend and get ready to play!</h4> <p>Learn about synonyms and antonyms while you discover new words.<br> Earn up to 5 points each round. <br> The round ends when you make three mistakes. <br><strong>The first player to 20 points wins!</strong></h1>")
     this.$startButton.click( (event) => {
       this.startGame()
     })
   }
 
+
+  hideBoard(){
+    this.$scoreboard.hide()
+    this.$roundboard.hide()
+    this.$wordList.hide()
+  }
+
   startGame() {
     var newGame = new Game()
     this.nextRound(newGame)
+    this.randomWordArray = Word.randomWords()
   }
-
 
   startRound(newGame){
     this.$startButton.hide()
@@ -43,11 +51,30 @@ class GameController {
     this.$scoreboard.show()
     this.$roundboard.show()
 
+    this.timeout(newGame)
+
     var $allWordListEls = $('.js--gameWords')
     $allWordListEls.click((event) => this.eventHandler(event, newGame))
   }
 
+
+  timeout(newGame){
+    this.seconds = 30
+    $('#timer').html(`Timer: ${this.seconds} secs`)
+    this.intervalID = setInterval(() => {this.countdown(newGame)}, 1000)
+  }
+
+  countdown(newGame){
+      this.seconds--
+      $('#timer').html(`Timer: ${this.seconds} secs`)
+    if (this.seconds == 0) {
+      clearInterval(this.intervalID)
+      this.nextRound(newGame)
+    }
+  }
+
   nextRound(newGame) {
+    this.seconds = 30
     if (newGame.firstRun) {
       newGame.firstRun = false
     } else {
@@ -59,15 +86,13 @@ class GameController {
     currentPlayer.mistakes = 0
 
     this.$rootWord.empty()
-    this.$scoreboard.hide()
-    this.$wordList.hide()
-    this.$roundboard.hide()
+
+    this.hideBoard()
     this.$messageboard.html(newGame.currentRules())
     this.$messageboard.show()
     this.$startText.html(`Player ${currentPlayer.id}: Start Next Round`)
     this.$startButton.show()
     $(".js--gameWords").remove()
-    
 
     this.$startButton.click( (event) => {
       this.startRound(newGame)
@@ -76,22 +101,21 @@ class GameController {
   }
 
   buildRandomWord(){
-    var newWord = Word.getRandom()
+    var newWord = this.randomWordArray.pop()
     newWord.build()
   }
 
   eventHandler(event, newGame){
     var wordInfo = event.currentTarget.id
-    var wordType = wordInfo.split("_")[1]
-    this.interpretMove(newGame, wordInfo, wordType)
+    this.interpretMove(newGame, wordInfo)
     // pass the ball
   }
 
-
-  interpretMove(newGame, wordInfo, wordType){
-  var value = newGame.getLevelValue()
-  var currentPlayer = newGame.currentPlayer()
-  var $wordDivInDOM = $(`#${wordInfo}`)
+  interpretMove(newGame, wordInfo){
+    var wordType = wordInfo.split("_")[1]
+    var value = newGame.getLevelValue()
+    var currentPlayer = newGame.currentPlayer()
+    var $wordDivInDOM = $(`#${wordInfo}`)
 
     if (value.includes(wordType)) {
       $wordDivInDOM.css('background-color', '#A9FFCB')
@@ -114,10 +138,5 @@ class GameController {
 
   roundOver(newGame) {
     return newGame.currentPlayer().roundScore >= 5 || newGame.currentPlayer().mistakes >= 3
-    // ADD A TIMER WHILE LOOP???
   }
-
-
 }
-  // define the listener function that checks whether right or not
-  // and make all the changes necessary to score, mistakes, etc

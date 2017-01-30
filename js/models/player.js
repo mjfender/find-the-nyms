@@ -4,7 +4,7 @@ class Player {
     this.score = 0
     this.roundScore = 0
     this.mistakes = 0
-    // this.correct_words = []
+    this.wordsUsed = []
   }
 
   makesMistake() {
@@ -18,9 +18,6 @@ class Player {
     this.score ++
     this.roundScore ++
   }
-
-
-
 
 }
 // note: in another model, figure out how to keep track of points earned per round per player
