@@ -21,6 +21,16 @@ class Game {
     }
   }
 
+  declareWinner() {
+    if (this.player1.score > this.player2.score){
+      return "Player 1"
+    } else if (this.player1.score === this.player2.score) {
+      return "Both Players."
+    } else {
+      return "Player 2"
+    }
+  }
+
   currentRules() {
     switch (this.level) {
       case 0:
