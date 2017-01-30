@@ -29,7 +29,7 @@ class Word {
       array[i] = array[currentIndex]
       array[currentIndex] = temp;
     })
-    return array
+    return array.slice(0, 21)
   }
 
 

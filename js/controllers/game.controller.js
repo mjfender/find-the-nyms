@@ -8,7 +8,8 @@ class GameController {
     this.$startText = $('#start-text')
     this.$messageboard = $('#messageboard')
     this.randomWordArray = []
-    this.timeoutID = 0
+    this.intervalID = 0
+    this.seconds = 30
   }
 
   init() {
@@ -48,14 +49,35 @@ class GameController {
     this.$scoreboard.show()
     this.$roundboard.show()
 
-    this.timeoutID = setTimeout(() => {this.nextRound(newGame)}, 90000)
+    this.timeout(newGame)
+
+
+    // $('#timer').html(`Timer: ${this.seconds} secs`)
+    // this.timeoutID = setTimeout(() => {this.nextRound(newGame)}, 30000)
+    // this.seconds--
+    // $('#timer').html(`Timer: ${this.seconds} secs`)
 
     var $allWordListEls = $('.js--gameWords')
     $allWordListEls.click((event) => this.eventHandler(event, newGame))
   }
 
+  timeout(newGame){
+    this.seconds = 30
+    $('#timer').html(`Timer: ${this.seconds} secs`)
+    this.intervalID = setInterval(() => {this.countdown(newGame)}, 1000)
+  }
+
+  countdown(newGame){
+      this.seconds--
+      $('#timer').html(`Timer: ${this.seconds} secs`)
+    if (this.seconds == 0) {
+      clearInterval(this.intervalID)
+      this.nextRound(newGame)
+    }
+  }
+
   nextRound(newGame) {
-    clearTimeout(this.timeoutID)
+    this.seconds = 30
     if (newGame.firstRun) {
       newGame.firstRun = false
     } else {
@@ -118,8 +140,5 @@ class GameController {
 
   roundOver(newGame) {
     return newGame.currentPlayer().roundScore >= 5 || newGame.currentPlayer().mistakes >= 3
-    // ADD A TIMER WHILE LOOP???
   }
-
-
 }
