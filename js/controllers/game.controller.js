@@ -32,6 +32,7 @@ class GameController {
   startGame() {
     var newGame = new Game()
     this.nextRound(newGame)
+    debugger
     this.randomWordArray = Word.randomWords()
   }
 

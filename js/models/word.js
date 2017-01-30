@@ -1,11 +1,17 @@
 var allWords = []
-var usedWords = []
+var fillerWords = []
+// var usedWords = []
 
 class Word {
-  constructor(name, object) {
+  constructor(name, object, real = true) {
     this.name = name
     this.all = object // this is the synonyms and antonyms
-    Word.all.push(this)
+
+    if (real) {
+      Word.all.push(this)
+    // pushes filler words into the instance's .filler 
+    }
+    else { Word.filler.push(this)}
   }
 
   wordEl(){
@@ -18,7 +24,8 @@ class Word {
     for (var key in wordObject) {
       array.push(`<div id="${key}_${wordObject[key]}" class="col s4 js--gameWords"><h4>${key}</h4></div>`)
     }
-    return array
+
+    return  array.concat(Word.randomFiller())
   }
 
   randomizeList(){
@@ -29,7 +36,7 @@ class Word {
       array[i] = array[currentIndex]
       array[currentIndex] = temp;
     })
-    return array.slice(0, 21)
+    return array.slice(0, 24)
   }
 
 
@@ -50,7 +57,26 @@ class Word {
     return array
   }
 
+  static randomFiller(){
+    var array = []
+    var fillerObject = Word.filler[0].all
+
+    for (var key in fillerObject) {
+      array.push(`<div id="${key}_${fillerObject[key]}" class="col s4 js--gameWords"><h4>${key}</h4></div>`)
+
+    }
+
+    array.forEach((element, i, array) => {
+      var currentIndex = Math.floor(Math.random() * ( i + 1))
+      var temp = array[i]
+      array[i] = array[currentIndex]
+      array[currentIndex] = temp;
+    })
+    return array.slice(0, 7)
+  }
+
 }
 
 Word.all = allWords
+Word.filler = fillerWords
 
