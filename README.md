@@ -1,4 +1,4 @@
-# js-game-synonyms-and-antonyms
+# Find the Nyms
 
 Find the Nyms is an educational game built in JavaScript. Two players take turns trying to correctly identify the synonyms and antonyms of a given root word.
 
