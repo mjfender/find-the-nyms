@@ -1,7 +1,7 @@
 # Find the Nyms
 
 ## Summary
-Find the Nyms is an educational game built in JavaScript by [Jennifer Wong](https://github.com/wongjenn) and [Matt Fender](https://github.com/mjfender), students at the Flatiron School in NYC.
+Find the Nyms is an educational game built in 3 days in JavaScript by [Jennifer Wong](https://github.com/wongjenn) and [Matt Fender](https://github.com/mjfender), students at the Flatiron School in NYC.
 
 In the game, two players take turns trying to correctly identify the synonyms and antonyms of a given root word. Each round lasts 30
 seconds. The round ends when the player makes three mistakes or wins 5 total points. Players win one point for correct answers and lose one
